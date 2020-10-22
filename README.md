@@ -93,8 +93,6 @@ Since we are in development mode on our localhost, there is no safety issue and 
 
 With just two simple steps, you have already generated a web page with .NET Razor Pages!
 
-**remove class?
-
 3 . Next we need to make classes (which are called models) that represent the database objects. If you know Symfony: it is quite similar to that.
 - Make a folder "Models" where you can store your database classes.
 - In that folder, make a "Teacher.cs" and a "Student.cs" file.
@@ -111,17 +109,18 @@ namespace YourApplicationName.Models
 - To add a property, just type "prop" and you should get an autocomplete option. 
 Press enter and you should now have something like this: `public int MyProperty { get; set; }`.
 Add Id, LastName, FirstName and Email properties and specify the correct types for them. You can add more properties if you like.
-- Do the same thing for your Student class but also add a Teacher property. 
+- Do the same thing for your Student class but also add a public virtual Teacher property and a TeacherId property of type int.
 Typehint Teacher as being of the Teacher Type.
 - Since your Teacher property is going to be the property that links your tables together, we have to add a data annotation above the property:
+- With data annotations, add [key] to both the Id tables to indicate the Id property as the primary key.
+- Then use data annotations to tell EF that our Teacher object has as foreign key the TeacherId column using:
+
 
 ```
 [ForeignKey("TeacherID")]
 ```
 With this, we are basically telling the EntityFramework that we want our student to link to a teacher and that the database can find this teacher using the foreign key "TeacherID". This way the TeacherID column in our Student table will point to the normal ID in the Teacher table.
-There are a lot more data annotations you can use, for instance if you want to make properties not nullable.
-
-**end-edit
+There are a lot more data annotations you can use, for instance if you want to make properties not nullable (`[Required]'), if you want properties to have a min or max length, if you want your properties to be formatted in a certain way, etc.
 
 4 . Now it's time to add some extra packages and useful tools. Run the following commands:
 
@@ -129,7 +128,12 @@ There are a lot more data annotations you can use, for instance if you want to m
 
 ```
     dotnet tool install --global dotnet-ef
-    dotnet tool install --global dotnet-aspnet-codegenerator
+
+TRY 
+    dotnet tool install --global aspnet-codegenerator --version 3.1.3
+ELSE    
+    (dotnet tool install --global dotnet-aspnet-codegenerator)
+
     dotnet add package MySql.Data.EntityFrameworkCore
 (OR dotnet add package Microsoft.EntityFrameworkCore.SQLite)
     dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -137,6 +141,14 @@ There are a lot more data annotations you can use, for instance if you want to m
     dotnet add package Microsoft.EntityFrameworkCore.SqlServer
     dotnet add package Microsoft.Extensions.Logging.Debug
 ```
+
+Check if aspnet-codegenerator version is the same as SDK (if you used `dotnet tool install --global dotnet-aspnet-codegenerator`, a newer version may have been installed):
+
+```
+dotnet tool list -g
+dotnet --list-sdks
+```
+
 The dotnet-ef tool adds the Entity Framework, which is an ORM meaning it allows you to convert C# Objects to database entries and back. Again, if you've worked with Symfony already,
  this should be familiar to you!
 
@@ -145,7 +157,7 @@ The codegenerator tool makes some useful commands available with which you can c
 The SQL packages are .NET packages we need to add to a project when we need to connect to a database to store information.
 
 5 . We still haven't created a class to work with our database yet. 
-Create a new folder give it an appropiate name, like "Data", and create a new file.
+Create a new folder, give it an appropiate name, like "Data", and create a new file.
 By convention this file is named "YourAppName" + "Context.cs", so name it YourAppNameContext.cs.
 
 Inside the file, specify that its contents are inside off the namespace "YourAppName.Data" (`namespace YourAppName.Data{}`) if your editor doesn't do this for you.
@@ -222,7 +234,7 @@ The Startup class is called like this:
 
 *III.* Inside the CreateHostBuilder() method we tell which class to use as startup (configuration, services) with `UseStartup<Startup>()`.
  
-9 . We now have our database class, models that represent the database entries and our configuration with the connection string. 
+9 . We now have our database class, models that represent the database entries, and our configuration with the connection string. 
 
 It's time to "create" some pages for our view where we can display, create, update and delete database entries. One of the good things about frameworks is that they have tools with which you can quickly generate basic pages that are based on your models.
 
@@ -240,14 +252,15 @@ This command basically specifies to the codegenerator to make razorpages based o
 
 11 . It's finally time to create our database! This is done with the EF tool we also installed earlier. 
 
-This means we can again run a command to create a database based on the models we created earlier. Each creation, update or deletion of a table or column, is stored in a migration file.
+This means we can again run a command to create a database based on the models we created earlier. 
+Each creation, update or deletion of a table or column, is stored in a migration file.
 
 The EF tool checks your models, DbContext and configuration (such as the database name specified in the connection string). If it sees that there is a change, it will add that change in a new migration file.
 
 Since we don't have a database yet, let's just start with our first migration, shall we? Run these commands:
 
 ```
-dotnet ef migrations add InitialCreate
+dotnet ef migrations add YourAppropiateMigrationName
 dotnet ef database update
 ```
 
@@ -273,11 +286,71 @@ table.ForeignKey(
 ```
 So with just two commands we created a database after the models we set up and with data annotations to specify the characteristics of our columns!
 
-12 . If we now run our app (click the green "play" button in your editor or use "dotnet run" in your terminal), we can go to our indexpages for students and teachers by adding /Students or /Teachers to the URL.
+12 . If we now run our app (click the green "play" button in your editor or use "dotnet run" in your terminal), 
+we can go to our indexpages for students and teachers by adding /Students or /Teachers to the URL, where you can see the links that lead to every CRUD page that the codegenerator has created for us!.
 
-There you can see the links that lead to every CRUD page that the codegenerator has created for us!
+Add two links using the asp-page tag helper to the navbar. The navbar was in one of the shared files, remember which one? You can add more links in your web page whenever you think it's useful.
 
-SaveChanges() persists changes of a tracked object
+13 . Create one or more teachers first so we have at least one teacher in our database.
+
+14 . Now let's add a dropdown list to the Student creation page so we can select the teacher for our student that way! To do that we'll need to add this to the model for that page:
+
+```
+        public IList<Teacher> Teacher { get;set; }
+        public async Task<IActionResult> OnGetAsync()
+        {
+            Teacher = await _context.Teacher.ToListAsync();
+            return Page();
+        }
+```
+Now our model also has acces to the teachers in the database!
+
+15 . Now that our model has a list of teachers available, we can use this list in the Create.cshtml page. Add the following div to the form:
+
+```
+            <div class="form-group">
+                <label asp-for="Student.TeacherId" class="control-label"></label>
+                <select asp-for="Student.TeacherId" class="form-control">
+                    <option value="" selected disabled hidden>Select teacher</option>
+                    
+                    @foreach (Teacher teacher in Model.Teacher)
+                    {
+                        <option value="@teacher.Id">
+                            @Html.Label($"{teacher.FirstName} {teacher.LastName}")
+                        </option>
+                    }
+                    
+                </select>
+            </div>
+```
+@ before code in .cshtml means that the following bit is an expression, so when we use an @foreach, we can iterate over every teacher in our list (Model.Teacher) and do something with that. 
+
+With this code we basically added options to our <select> where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
+
+When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers. 
+
+16 . Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
+
+So let's start working on that, shall we?
+
+Even if we have our Teacher Teacher property in the Student model, this Teacher object doesn't load automatically. We need to add something to the code in the pagemodel for the Students index page for that. The method that fetches your students from the database should be changed to look like this:
+
+```
+public async Task OnGetAsync()
+        {
+            Student = await _context.Student
+                .Include(student => student.Teacher)
+                .ToListAsync();
+```
+By default, EF doesn't load complex datastructures related to an entity, so we need to specify that our Student entities have to include their Teacher Teacher property with .Include().
+
+Now you can use Student.Teacher in the Razor Page's view! Add another header to the table for our teacher, and add the teacher names by extracting FirstName and LastName from the Teacher object. Remember to use string interpolation!
+
+17. **CONGRATULATIONS!** You have survived the workshop, and that on a Friday afternoon!
+
+But wait... There's a **Bonus:**
+
+* For our Teachers detail page, display a list with all the students that teacher has.
 
 
 
