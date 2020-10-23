@@ -327,7 +327,7 @@ Now our model also has acces to the teachers in the database!
 
  The `@` before code in .cshtml means that the following bit is an expression, so when we use an `@foreach`, we can iterate over every teacher in our list (Model.Teacher) and do something with every teacher-instance. 
 
-With this code we basically added options to our <select> where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
+With this code we basically added options to our `<select>` where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
 
 When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers.
 
