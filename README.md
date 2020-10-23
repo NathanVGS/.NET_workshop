@@ -52,7 +52,7 @@ Congratulations! You just wrote your first C# and .NET application!
 
 ## 3. Time for the real work: a CRUD website with Razor Pages
 
-1 . Make a new folder where you want your files to go, cd into it and start a new .NET project. 
+1. Make a new folder where you want your files to go, cd into it and start a new .NET project. 
 
 - Type `dotnet new webapp` in your terminal and open the folder with your text editor, with VS Code, click "Yes" when a message pops up to add required assets.
 
@@ -60,7 +60,7 @@ Congratulations! You just wrote your first C# and .NET application!
 
 With Rider you can also make a new webapp manually via the UI: choose the ASP.NET Core Web Application option from the menu, name it whatever you want and specify the type to be that of "web app". Then click "create".
 
-2 . A template application is automatically generated. 
+2. A template application is automatically generated. 
 A quick overview of the directories:
 
 - Properties: you don't need to worry about this folder
@@ -93,7 +93,7 @@ Since we are in development mode on our localhost, there is no safety issue and 
 
 With just two simple steps, you have already generated a web page with .NET Razor Pages!
 
-3 . Next we need to make classes (which are called models) that represent the database objects. If you know Symfony: it is quite similar to that.
+3. Next we need to make classes (which are called models) that represent the database objects. If you know Symfony: it is quite similar to that.
 - Make a folder "Models" where you can store your database classes.
 - In that folder, make a "Teacher.cs" and a "Student.cs" file.
 - Add the following code to your Teacher class: 
@@ -122,7 +122,7 @@ Typehint Teacher as being of the Teacher Type.
 With this, we are basically telling the EntityFramework that we want our student to link to a teacher and that the database can find this teacher using the foreign key "TeacherID". This way the TeacherID column in our Student table will point to the normal ID in the Teacher table.
 There are a lot more data annotations you can use, for instance if you want to make properties not nullable (`[Required]'), if you want properties to have a min or max length, if you want your properties to be formatted in a certain way, etc.
 
-4 . Now it's time to add some extra packages and useful tools. Run the following commands:
+4. Now it's time to add some extra packages and useful tools. Run the following commands:
 
 (If, with Rider, you get an error "Could not find any project in ...", run `dotnet add YourProjectName package packageName` instead, or look for the package name in your NuGet package manager (click the NuGet button at the bottom))
 
@@ -156,13 +156,13 @@ The codegenerator tool makes some useful commands available with which you can c
 
 The SQL packages are .NET packages we need to add to a project when we need to connect to a database to store information.
 
-5 . We still haven't created a class to work with our database yet. 
+5. We still haven't created a class to work with our database yet. 
 Create a new folder, give it an appropiate name, like "Data", and create a new file.
 By convention this file is named "YourAppName" + "Context.cs", so name it YourAppNameContext.cs.
 
 Inside the file, specify that its contents are inside off the namespace "YourAppName.Data" (`namespace YourAppName.Data{}`) if your editor doesn't do this for you.
 
-6 . Inside this namespace we have to create our Context class, which extends the EntityFramework's DbContext class.
+6. Inside this namespace we have to create our Context class, which extends the EntityFramework's DbContext class.
 
 This is what that class should look like:
 ```
@@ -194,7 +194,7 @@ Since our Context class extends this class, it will have an options property by 
 Lastly, we have two DbSet properties that correspond to the tables we want in our database, so one for Student and one for Teacher.
 
 
-7 . We now have a class to connect to our database, but we still have to work on our "options" that we want to pass to this class.
+7. We now have a class to connect to our database, but we still have to work on our "options" that we want to pass to this class.
 One of the options our Context class needs is a connection string for our database.
 
 We can add one or more connection strings in our appsettings.json file. 
@@ -208,7 +208,7 @@ It doesn't matter what you call your connection string (in our example "StudentT
 
 Replace "databaseName" with whatever name you want your database to get, you don't have to create a database yet with MySQL! Then replace "userName" and "password" with your MySQL username and password.
 
-8 . Now we have to tell our code it should use the DbContext with as option the connection string we just created. For this we need to go into the Startup.cs file.
+8. Now we have to tell our code it should use the DbContext with as option the connection string we just created. For this we need to go into the Startup.cs file.
 
 In this file, add two new using statements (or import them later with Rider): 
 
@@ -234,7 +234,7 @@ The Startup class is called like this:
 
 *III.* Inside the CreateHostBuilder() method we tell which class to use as startup (configuration, services) with `UseStartup<Startup>()`.
  
-9 . We now have our database class, models that represent the database entries, and our configuration with the connection string. 
+9. We now have our database class, models that represent the database entries, and our configuration with the connection string. 
 
 It's time to "create" some pages for our view where we can display, create, update and delete database entries. One of the good things about frameworks is that they have tools with which you can quickly generate basic pages that are based on your models.
 
@@ -248,9 +248,9 @@ dotnet aspnet-codegenerator razorpage -m Student -dc YourAppNameContext -udl -ou
 
 This command basically specifies to the codegenerator to make razorpages based on the model of Student and your context class, and to put those CRUD pages inside of the Pages/Students directory.
 
-10 . Run the same command again, but this time for your teacher model.
+10. Run the same command again, but this time for your teacher model.
 
-11 . It's finally time to create our database! This is done with the EF tool we also installed earlier. 
+11. It's finally time to create our database! This is done with the EF tool we also installed earlier. 
 
 This means we can again run a command to create a database based on the models we created earlier. 
 Each creation, update or deletion of a table or column, is stored in a migration file.
@@ -286,14 +286,14 @@ table.ForeignKey(
 ```
 So with just two commands we created a database after the models we set up and with data annotations to specify the characteristics of our columns!
 
-12 . If we now run our app (click the green "play" button in your editor or use "dotnet run" in your terminal), 
+12. If we now run our app (click the green "play" button in your editor or use "dotnet run" in your terminal), 
 we can go to our indexpages for students and teachers by adding /Students or /Teachers to the URL, where you can see the links that lead to every CRUD page that the codegenerator has created for us!.
 
 Add two links using the asp-page tag helper to the navbar. The navbar was in one of the shared files, remember which one? You can add more links in your web page whenever you think it's useful.
 
-13 . Create one or more teachers first so we have at least one teacher in our database.
+13. Create one or more teachers first so we have at least one teacher in our database.
 
-14 . Now let's add a dropdown list to the Student creation page so we can select the teacher for our student that way! To do that we'll need to add this to the model for that page:
+14. Now let's add a dropdown list to the Student creation page so we can select the teacher for our student that way! To do that we'll need to add this to the model for that page:
 
 ```
         public IList<Teacher> Teacher { get;set; }
@@ -305,7 +305,7 @@ Add two links using the asp-page tag helper to the navbar. The navbar was in one
 ```
 Now our model also has acces to the teachers in the database!
 
-15 . Now that our model has a list of teachers available, we can use this list in the Create.cshtml page. Add the following div to the form:
+15. Now that our model has a list of teachers available, we can use this list in the Create.cshtml page. Add the following div to the form:
 
 ```
             <div class="form-group">
@@ -327,7 +327,8 @@ Now our model also has acces to the teachers in the database!
 
 With this code we basically added options to our <select> where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
 
-When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers.  
+When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers.    
+
 
 
 16. Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
