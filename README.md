@@ -1,11 +1,11 @@
-#Workshop .NET
+# Workshop .NET
 
-##Goals:
+## Goals:
 
 - Learn some C#
 - Learn the basic principles of an ASP.NET RazorPages application
 
-##1. Installation
+## 1. Installation
 
 1 . This readme assumes that you have git installed (check with "git --version" in terminal), that you have MySQL installed and that you can work with a database manager like DBeaver. 
 If you don't have MySQL, you need to install the SQLite package.
@@ -28,7 +28,7 @@ If you do use Visual Studio Code, make sure to click yes when this window pops u
 ![Select yes when VS Code asks if it should add "Required assets"](confirmVSCode.png "Select yes")
 
 
-##2. Introduction to C# and .NET: Console Calculator
+## 2. Introduction to C# and .NET: Console Calculator
 
 1. Make a folder for your calculator files, cd to it and run the command "dotnet new console". Open the folder with your text editor of choice. 
 Alternatively, if you did choose to use Rider, you can create a project with the Rider's and select Console application in the menu.
@@ -50,7 +50,7 @@ be triggered by the runtime, so this is where your code should start. For this i
 Congratulations! You just wrote your first C# and .NET application!
 
 
-##3. Time for the real work: a CRUD website with Razor Pages
+## 3. Time for the real work: a CRUD website with Razor Pages
 
 1 . Make a new folder where you want your files to go, cd into it and start a new .NET project. 
 
@@ -351,6 +351,7 @@ Now you can use Student.Teacher in the Razor Page's view! Add another header to 
 But wait... There's a **Bonus:**
 
 * For our Teachers detail page, display a list with all the students that teacher has.
+* For the front-end lovers: style your page a bit!
 
 
 
