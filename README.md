@@ -117,7 +117,7 @@ Typehint Teacher as being of the Teacher Type.
 
 
 ```
-[ForeignKey("TeacherID")]
+[ForeignKey("TeacherId")]
 ```
 With this, we are basically telling the EntityFramework that we want our student to link to a teacher and that the database can find this teacher using the foreign key "TeacherID". This way the TeacherID column in our Student table will point to the normal ID in the Teacher table.
 There are a lot more data annotations you can use, for instance if you want to make properties not nullable (`[Required]'), if you want properties to have a min or max length, if you want your properties to be formatted in a certain way, etc.
