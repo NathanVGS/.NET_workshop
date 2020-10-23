@@ -329,9 +329,12 @@ With this code we basically added options to our <select> where the value is the
 
 When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers. 
 
+
 16 . Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
 
+
 So let's start working on that, shall we?
+
 
 Even if we have our Teacher Teacher property in the Student model, this Teacher object doesn't load automatically. We need to add something to the code in the pagemodel for the Students index page for that. The method that fetches your students from the database should be changed to look like this:
 
@@ -357,6 +360,3 @@ But wait... There's a **Bonus:**
 * For our Teachers detail page, display a list with all the students that teacher has.
 * For the front-end lovers: style your page a bit!
 
-
-
-CHECK CODEGENERATOR VERSION?
