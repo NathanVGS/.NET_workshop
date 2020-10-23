@@ -260,7 +260,7 @@ The EF tool checks your models, DbContext and configuration (such as the databas
 Since we don't have a database yet, let's just start with our first migration, shall we? Run these commands:
 
 ```
-dotnet ef migrations add YourAppropiateMigrationName
+dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
