@@ -327,7 +327,7 @@ The "@" before code in .cshtml means that the following bit is an expression, so
 
 With this code we basically added options to our <select> where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
 
-When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers.    
+When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers. 
 
 16. Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
 
@@ -345,11 +345,9 @@ public async Task OnGetAsync()
 
 By default, EF doesn't load complex datastructures related to an entity, so we need to specify that our Student entities have to include their Teacher Teacher property with .Include().
 
-Now you can use Student.Teacher in the Razor Page's view! Add another header to the table for our teacher, and add the teacher names by extracting FirstName and LastName from the Teacher object. Remember to use string interpolation!
-
+Now you can use Student.Teacher in the Razor Page's view! Add another header to the table for our teacher, and add the teacher names by extracting FirstName and LastName from the Teacher object. Remember to use string interpolation!  
 
 17. **CONGRATULATIONS!** You have survived the workshop, and that on a Friday afternoon!
-
 
 But wait... There's a **Bonus:**
 
