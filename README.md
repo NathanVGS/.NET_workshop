@@ -7,12 +7,12 @@
 
 ## 1. Installation
 
-1 . This readme assumes that you have git installed (check with "git --version" in terminal), that you have MySQL installed and that you can work with a database manager like DBeaver. 
+1. This readme assumes that you have git installed (check with "git --version" in terminal), that you have MySQL installed and that you can work with a database manager like DBeaver. 
 If you don't have MySQL, you need to install the SQLite package.
 
-2 . Go to https://dotnet.microsoft.com/download and click "Install .NET Core" (Linux) or "Download .NET Core" (MacOS/Windows)
+2. Go to https://dotnet.microsoft.com/download and click "Install .NET Core" (Linux) or "Download .NET Core" (MacOS/Windows)
 
-3 . Follow the steps for your OS, for Linux:
+3. Follow the steps for your OS, for Linux:
 - first add the Microsoft package signing key to your list of trusted keys and add the package repository
 - then install the .NET Core SDK (the SDK includes the runtime already)
 - **IMPORTANT**: for the last command, specify the exact version of the SDK, in our experience, 
@@ -20,7 +20,7 @@ the newest version resulted in a bug when using one of the tools we'll be instal
 
 `sudo apt-get install -y dotnet-sdk-3.1=3.1.301-1` 
 
-4 . Optional (but recommended): install Jetbrains Rider. 
+4. Optional (but recommended): install Jetbrains Rider. 
 (Ubuntu: `sudo snap install rider --classic`)
 
 If you do use Visual Studio Code, make sure to click yes when this window pops up on a new dotnet project: 
@@ -330,7 +330,7 @@ With this code we basically added options to our <select> where the value is the
 When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers.  
 
 
-16 . Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
+16. Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
 
 
 So let's start working on that, shall we?
