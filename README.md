@@ -244,6 +244,8 @@ Now run this command, but change "YourAppNameContext" to the name you've given y
 
 ```
 dotnet aspnet-codegenerator razorpage -m Student -dc YourAppNameContext -udl -outDir Pages/Students --referenceScriptLibraries
+OR
+~/.dotnet/tools/dotnet-aspnet-codegenerator razorpage -m Student -dc WebAppContext -udl -outDir Pages/Students --referenceScriptLibraries
 ``` 
 
 This command basically specifies to the codegenerator to make razorpages based on the model of Student and your context class, and to put those CRUD pages inside of the Pages/Students directory.
