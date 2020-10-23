@@ -342,11 +342,15 @@ public async Task OnGetAsync()
                 .Include(student => student.Teacher)
                 .ToListAsync();
 ```
+
 By default, EF doesn't load complex datastructures related to an entity, so we need to specify that our Student entities have to include their Teacher Teacher property with .Include().
+
 
 Now you can use Student.Teacher in the Razor Page's view! Add another header to the table for our teacher, and add the teacher names by extracting FirstName and LastName from the Teacher object. Remember to use string interpolation!
 
+
 17. **CONGRATULATIONS!** You have survived the workshop, and that on a Friday afternoon!
+
 
 But wait... There's a **Bonus:**
 
