@@ -327,7 +327,7 @@ Now our model also has acces to the teachers in the database!
 
 With this code we basically added options to our <select> where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
 
-When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers. 
+When this gets posted, the OnPostAsync() method in your Create.cshtml.cs file triggers.  
 
 
 16 . Add a student and check if the database adds the TeacherId (as well as all the other properties). Once you add a student, you get redirected to the Students index page, but we can't see yet which teacher our student has! 
