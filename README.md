@@ -303,6 +303,7 @@ Add two links using the asp-page tag helper to the navbar. The navbar was in one
             return Page();
         }
 ```
+
 Now our model also has acces to the teachers in the database!
 
 15. Now that our model has a list of teachers available, we can use this list in the Create.cshtml page. Add the following div to the form:
@@ -323,6 +324,7 @@ Now our model also has acces to the teachers in the database!
                 </select>
             </div>
 ```
+
 The "@" before code in .cshtml means that the following bit is an expression, so when we use an `@foreach`, we can iterate over every teacher in our list (Model.Teacher) and do something with every teacher-instance. 
 
 With this code we basically added options to our <select> where the value is the Id of the teacher, and the text for our option uses string interpolation to display the teachers full name.
@@ -346,6 +348,7 @@ public async Task OnGetAsync()
 By default, EF doesn't load complex datastructures related to an entity, so we need to specify that our Student entities have to include their Teacher Teacher property with .Include().
 
 Now you can use Student.Teacher in the Razor Page's view! Add another header to the table for our teacher, and add the teacher names by extracting FirstName and LastName from the Teacher object. Remember to use string interpolation!  
+
 
 17. **CONGRATULATIONS!** You have survived the workshop, and that on a Friday afternoon!
 
